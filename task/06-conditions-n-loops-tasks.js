@@ -30,7 +30,22 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 5 == 0 && num % 3 == 0)
+	{
+		return 'FizzBuzz';
+	}
+	else if (num % 5 == 0)
+	{
+		return 'Buzz';
+	}
+	else if (num % 3 == 0)
+	{
+		return 'Fizz';
+	}
+	else 
+	{
+		return num;
+	}
 }
 
 
@@ -46,7 +61,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+	return n ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -63,7 +78,10 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+	var sum = 0;
+    for (var i = n1; i <= n2; i++)
+		sum += i;
+	return sum;
 }
 
 
@@ -82,7 +100,14 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if ((a < b + c) && (b < a + c) && (c < a + b))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 
@@ -119,7 +144,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
 
 
@@ -166,7 +191,26 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+	for (var currentChar = 0; currentChar < str.length; currentChar++)
+	{
+		var firstChr = str[currentChar];
+		var repeatedCount = 0;
+		for (var indexChar = 0; indexChar < str.length; indexChar++)
+		{
+			if (str[indexChar] == firstChr)
+			{
+				repeatedCount++;
+				if (repeatedCount == 2)
+				{
+					break;
+				}
+			}
+		}			
+		if (repeatedCount == 1)
+		{
+			return firstChr;
+		}
+	}
 }
 
 
@@ -192,7 +236,36 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    var resultInterval = '';
+	if (isStartIncluded == true)
+	{
+		resultInterval += '[';
+	}
+	else
+	{
+		resultInterval += '(';
+	}
+	if (a > b)
+	{
+		resultInterval += b;
+		resultInterval += ', ';
+		resultInterval += a;
+	}
+	else 
+	{
+		resultInterval += a;
+		resultInterval += ', ';
+		resultInterval += b;
+	}
+	if (isEndIncluded == true)
+	{
+		resultInterval += ']';
+	}
+	else
+	{
+		resultInterval += ')';
+	}
+	return resultInterval;
 }
 
 
@@ -209,7 +282,12 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    var stringToFill = '';
+	for (var index = str.length - 1; index >= 0; index--)
+	{
+		stringToFill += str[index];
+	}
+	return stringToFill;
 }
 
 
@@ -226,7 +304,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+	num = num + '';
+	return num.split('').reverse().join('');
 }
 
 
@@ -250,8 +329,9 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
+
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
 }
 
 
@@ -270,7 +350,18 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+	var str = num.toString();
+	var sum = 0;
+
+	for (var i = 0; i < str.length; i++) {
+		sum += parseInt(str.charAt(i), 10);
+	}
+	sum = sum.toString();
+	var resultSum = 0;
+	for (var i = 0; i < sum.length; i++) {
+		resultSum += parseInt(sum.charAt(i), 10);
+	}
+	return resultSum;
 }
 
 
@@ -296,7 +387,47 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let stack = [];
+            for (const ch of str.split(""))
+            {
+                switch (ch)
+                {
+                    case "(":
+                        stack.push(1) ;
+                        break;
+                    case "[":
+                        stack.push(2);
+                        break;
+                    case "{":
+                        stack.push(3);
+                        break;
+					case "<":
+						stack.push(4);
+						break;
+					case ">":
+						if (stack[stack.length - 1] != 4) return false;
+                        stack.pop();
+                        break;
+                    case "}":
+                        if (stack[stack.length - 1] != 3) return false;
+                        stack.pop();
+                        break;
+                    case "]":
+                        if (stack[stack.length - 1] != 2) return false;
+                        stack.pop();
+                        break;
+                    case ")":
+                        if (stack[stack.length - 1] != 1) return false;
+                        stack.pop();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (stack.length == 0)
+				return true;
+			else 
+				return false;
 }
 
 
@@ -356,7 +487,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+	return num.toString(n);
 }
 
 
