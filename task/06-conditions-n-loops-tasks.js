@@ -175,7 +175,11 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+	if (((point.x - circle.center.x) * (point.x - circle.center.x) + (point.y - circle.center.y) * (point.y - circle.center.y)) < circle.radius * circle.radius) {
+		return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -503,8 +507,8 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes){
+	throw new Error('Not implemented');
 }
 
 
@@ -527,7 +531,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+	var aNumRows = m1.length, aNumCols = m1[0].length,
+      bNumRows = m2.length, bNumCols = m2[0].length,
+      m = new Array(aNumRows); 
+	  for (var r = 0; r < aNumRows; ++r) {
+		m[r] = new Array(bNumCols);
+		for (var c = 0; c < bNumCols; ++c) {
+			m[r][c] = 0;
+		for (var i = 0; i < aNumCols; ++i) {
+			m[r][c] += m1[r][i] * m2[i][c];
+		  }
+		}
+	}
+  return m;
 }
 
 
